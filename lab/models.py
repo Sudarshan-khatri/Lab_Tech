@@ -1,13 +1,23 @@
 from django.db import models
 import random
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
 class LabModel(models.Model):
-    lab_name=models.CharField(max_length=100,blank=True)
+    Branch_type_choice=[
+        ('Headquarter','Headquarter'),
+        ('Other Branch','other Branch')
+    ]
+    Branch_name=models.CharField(max_length=100,blank=True)
+    Email=models.EmailField(max_length=300,unique=True, null=True, blank=True)
+    Phone_number=PhoneNumberField(blank=True)
     location=models.CharField(max_length=200,blank=True)
     lab_code=models.CharField(max_length=200,blank=True,editable=False)
     lab_head=models.CharField(max_length=200)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6,default=0.0)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6,default=0.0)
+    Branch_type=models.CharField(max_length=200,choices=Branch_type_choice,blank=True)
     capacity=models.IntegerField()
     is_active=models.BooleanField(default=True)
     created_at=models.DateTimeField(auto_now_add=True)
@@ -28,5 +38,5 @@ class LabModel(models.Model):
 
 
     def __str__(self):
-       return  self.lab_name, 
+       return  self.Branch_name 
         
