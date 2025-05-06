@@ -20,11 +20,18 @@ from django.urls import path,include
 from rest_framework import routers
 from lab.routers.routers import lab_routers
 from servicemanagement.routers.router import service_router
+from banner.routers.router import banner_router
+from team.routers.router import team_router
+from socialmedia.routers.router import socialMedia_router
 
 
 router=routers.DefaultRouter()
 router.registry.extend(lab_routers.registry)
 router.registry.extend(service_router.registry)
+router.registry.extend(banner_router.registry)
+router.registry.extend(team_router.registry)
+router.registry.extend(socialMedia_router.registry)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

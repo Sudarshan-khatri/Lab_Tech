@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'servicemanagement',
     'booking',
     'socialmedia',
+    'banner',
+    'team',
     
 ]
 
