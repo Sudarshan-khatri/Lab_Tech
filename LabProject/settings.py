@@ -39,16 +39,28 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #third party app
     'rest_framework',
+    'rest_framework.authtoken',
+    'drf_yasg',
 
-    #user definde app
+    #user define app
     'lab',
     'servicemanagement',
     'booking',
     'socialmedia',
     'banner',
     'team',
+    'logix',
     
 ]
+AUTH_USER_MODEL = 'logix.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication' 
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
