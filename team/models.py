@@ -11,16 +11,16 @@ class Team(models.Model):
         ('Admin', 'Admin'),
     ]
      
-    Full_name=models.CharField(max_length=300,blank=True,null=True)
+    TeamName=models.CharField(max_length=300,blank=True,null=True)
     Email=models.EmailField(max_length=300,null=True,blank=True)
     Phone=PhoneNumberField(null=True,blank=True)
     Role=models.CharField(max_length=300,choices=ROLE_CHOICES,null=True)
-    # lab=models.ForeignKey('lab.LabModel',on_delete=models.CASCADE,related_name='team_member')
+    lab=models.ForeignKey('lab.LabModel',on_delete=models.CASCADE,null=True,related_name='team_member')
     is_active=models.BooleanField(default=True)
     joined_date=models.DateField(auto_now_add=True,null=True)
 
     def __str__(self):
-        return f"Team member{self.Full_name}"
+        return self.TeamName
     
 
     

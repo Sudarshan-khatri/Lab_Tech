@@ -25,8 +25,13 @@ from servicemanagement.routers.router import service_router
 from banner.routers.router import banner_router
 from team.routers.router import team_router
 from socialmedia.routers.router import socialMedia_router
-from logix.routers.router import logix_router
-from logix.viewsets.viewset import LoginUser
+from logix.viewsets.viewset import RegisterView,LoginView
+from booking.routers.router import Booking_router
+from FAQS.routers.router import Faqs_router
+from rest_framework_simplejwt.views import (
+    TokenObtainSlidingView,
+    TokenRefreshSlidingView,
+)
 
 
 router=routers.DefaultRouter()
@@ -35,30 +40,32 @@ router.registry.extend(service_router.registry)
 router.registry.extend(banner_router.registry)
 router.registry.extend(team_router.registry)
 router.registry.extend(socialMedia_router.registry)
-router.registry.extend(logix_router.registry)
+router.registry.extend(Booking_router.registry)
+router.registry.extend(Faqs_router.registry)
 
 
 #swagger documetation:
 schema_view=get_schema_view(
     openapi.Info(
-        title="My API",
-        default_version='v2',
-        description="Test description",
-        terms_of_service="https://www.example.com/policies/terms/",
-        contact=openapi.Contact(email="contact@example.com"),
+        title="Lab API",
+        default_version='v1',
+        description="API for managing books",
+        terms_of_service="https://www.example.com/terms/",
+        contact=openapi.Contact(email="support@example.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
-    permission_classes=[permissions.AllowAny],
-)
+    permission_classes=(permissions.AllowAny,),
+    )
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(router.urls)),
-    path('login',LoginUser.as_view(),name='Login'),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    
-
+    path('register',RegisterView.as_view(),name='register'),
+    path('login',LoginView.as_view(),name='login'),
+    path('api/token/', TokenObtainSlidingView.as_view(), name='token_obtain'),
+    path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh'),
+    path('', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),
 ]

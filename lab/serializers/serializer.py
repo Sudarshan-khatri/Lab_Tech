@@ -11,7 +11,7 @@ class ListLabModelSerializer(serializers.ModelSerializer):
 class RetrieveLabModelSerializer(serializers.ModelSerializer):
     class Meta:
         model=LabModel
-        fields=['lab_name','location','lab_head','capacity']
+        fields=['Branch_name','location','lab_head','capacity']
 
 #serializer to write the data
 class WriteLabModelSerializer(serializers.ModelSerializer):

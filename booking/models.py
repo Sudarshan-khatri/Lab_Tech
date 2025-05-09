@@ -29,11 +29,16 @@ class BookingModel(models.Model):
     Gender=models.CharField(max_length=200,choices=gender_choice,default='Male')
     Appointment_Date=models.DateField(auto_now=True)
     Services=models.ForeignKey('servicemanagement.ServiceManagement',on_delete=models.CASCADE,blank=True,related_name='servicemgt')
-    Amount=models.ForeignKey('servicemanagement.ServiceManagement',on_delete=models.CASCADE,related_name='service')
+    Amount=models.ForeignKey('servicemanagement.ServiceManagement',on_delete=models.CASCADE,related_name='amount')
     Payment_status=models.CharField(max_length=200,choices=PAYMENT_STATUS_CHOICES,default='pending')
     Payment_option=models.CharField(max_length=200,choices=PAYMENT_METHOD_CHOICES,default='eSewa')
     Message=models.CharField(max_length=3000,blank=True)
     Appointment_Booked=models.CharField(max_length=200,choices=Appointment_Booked_choice,default='At clinic')
+
+
+
+    created_at=models.DateTimeField(auto_now_add=True,blank=True,null=True)
+    updated_at=models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
 
 
