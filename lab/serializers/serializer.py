@@ -4,7 +4,7 @@ from ..models import LabModel
 class ListLabModelSerializer(serializers.ModelSerializer):
     class Meta:
         model=LabModel
-        fields=['Branch_name','location','lab_code','lab_head','capacity','is_active','created_at','updated_at']
+        fields='__all__'
 
 
 #serilaizer to retrieve the data

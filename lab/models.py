@@ -9,9 +9,9 @@ class LabModel(models.Model):
         ('Headquarter','Headquarter'),
         ('Other Branch','other Branch')
     ]
-    Branch_name=models.CharField(max_length=100,blank=True)
+    Branch_name=models.CharField(max_length=100,unique=True,blank=True)
     Email=models.EmailField(max_length=300,unique=True, null=True, blank=True)
-    Phone_number=PhoneNumberField(blank=True)
+    Phone_number=PhoneNumberField(unique=True,blank=True)
     location=models.CharField(max_length=200,blank=True)
     lab_code=models.CharField(max_length=200,blank=True,editable=False)
     lab_head=models.CharField(max_length=200)
@@ -36,6 +36,8 @@ class LabModel(models.Model):
                     break
         super().save(*arg,**kwargs)
 
+    def save(self,*args,**kwargs):
+       pass
 
     def __str__(self):
        return  self.Branch_name 

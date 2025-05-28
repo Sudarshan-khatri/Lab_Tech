@@ -49,8 +49,9 @@ INSTALLED_APPS = [
     'socialmedia',
     'banner',
     'team',
-    'logix',
+    # 'logix',
     'FAQS',
+    'accounts',
     
 ]
 
@@ -83,7 +84,7 @@ EMAIL_HOST_PASSWORD = 'gmailgmail@123'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

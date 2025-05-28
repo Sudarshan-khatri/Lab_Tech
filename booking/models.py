@@ -28,8 +28,8 @@ class BookingModel(models.Model):
     Address=models.CharField(max_length=200,blank=True)
     Gender=models.CharField(max_length=200,choices=gender_choice,default='Male')
     Appointment_Date=models.DateField(auto_now=True)
-    Services=models.ForeignKey('servicemanagement.ServiceManagement',on_delete=models.CASCADE,blank=True,related_name='servicemgt')
-    Amount=models.ForeignKey('servicemanagement.ServiceManagement',on_delete=models.CASCADE,related_name='amount')
+    Services=models.ManyToManyField('servicemanagement.ServiceManagement',blank=True,related_name='servicemgt')
+    Amount=models.PositiveSmallIntegerField()
     Payment_status=models.CharField(max_length=200,choices=PAYMENT_STATUS_CHOICES,default='pending')
     Payment_option=models.CharField(max_length=200,choices=PAYMENT_METHOD_CHOICES,default='eSewa')
     Message=models.CharField(max_length=3000,blank=True)
@@ -41,6 +41,7 @@ class BookingModel(models.Model):
     updated_at=models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
 
+    
 
     def __str__(self):
         return self.Full_name

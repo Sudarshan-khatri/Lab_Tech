@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from logix.serializers.serializer import RegisterSerializer,LoginSerializer,UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny,IsAuthenticated
 from django.contrib.auth import authenticate
 from ..utilities.pagination import LogixPagination
 from ..utilities.permission import IsAdmin,IsStaff,IsUser
@@ -12,7 +12,7 @@ from ..utilities.permission import IsAdmin,IsStaff,IsUser
 
 class RegisterView(generics.CreateAPIView):
     queryset=User.objects.all()
-    permission_classes=[IsAdmin]
+    permission_classes=[AllowAny]
     serializer_class=RegisterSerializer
     pagination_class=LogixPagination
 
@@ -36,11 +36,17 @@ class LoginView(generics.CreateAPIView):
         if user is not  None:
             refresh=RefreshToken.for_user(user)
             user_serializer = UserSerializer(user)
-            role='admin' if user.is_superuser else 'staff' if user.is_staff else 'user'
+            # #instance of role 
+            # if user.IsAdmin:
+            #     role='Admin'
+            # elif user.IsAdmin:
+            #     role='staff'
+            # else:
+            #     role='user'
             return Response({
                 'refresh':str(refresh),
                 'access':str(refresh.access_token),
                 'user':user_serializer.data,
-                'role':role
+                # 'role':role
                 })
         return Response({'Message':'Invalid credential'},status=401)

@@ -5,8 +5,7 @@ from ..models import BookingModel
 class ListBookingSerializer(serializers.ModelSerializer):
     class Meta:
         model=BookingModel
-        fields=[ 'Full_name','Email','Phone_Number','Address','Gender','Appointment_Date','Services','Amount','Payment_status','Payment_option','Message','Appointment_Booked']
-
+        fields='__all__'
 class RetrieveBookingSerializer(serializers.Serializer):
     class Meta:
         model=BookingModel

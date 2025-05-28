@@ -25,14 +25,16 @@ from servicemanagement.routers.router import service_router
 from banner.routers.router import banner_router
 from team.routers.router import team_router
 from socialmedia.routers.router import socialMedia_router
-from logix.viewsets.viewset import RegisterView,LoginView
+from booking import urls as booking_urls
 from booking.routers.router import Booking_router
 from FAQS.routers.router import Faqs_router
+from accounts.routers.router import Account_router
+from logix.viewsets.viewset import RegisterView,LoginView
 from rest_framework_simplejwt.views import (
     TokenObtainSlidingView,
     TokenRefreshSlidingView,
 )
-
+from logix.views import Login
 
 router=routers.DefaultRouter()
 router.registry.extend(lab_routers.registry)
@@ -42,6 +44,8 @@ router.registry.extend(team_router.registry)
 router.registry.extend(socialMedia_router.registry)
 router.registry.extend(Booking_router.registry)
 router.registry.extend(Faqs_router.registry)
+router.registry.extend(Account_router.registry)
+# router.registry.extend(logix_router.registry)
 
 
 #swagger documetation:
@@ -68,4 +72,5 @@ urlpatterns = [
     path('api/token/', TokenObtainSlidingView.as_view(), name='token_obtain'),
     path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh'),
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),
+    # path('Lgn',views.Login),
 ]
