@@ -12,7 +12,7 @@ class Team(models.Model):
     ]
      
     TeamName=models.CharField(max_length=300,blank=True,null=True)
-    Team_member=models.ManyToManyField('accounts.Account',related_name='member')
+    Team_member=models.ManyToManyField('accounts.Account',null=True,blank=True)
     Email=models.EmailField(max_length=300,null=True,blank=True)
     Phone=PhoneNumberField(null=True,blank=True)
     Role=models.CharField(max_length=300,choices=ROLE_CHOICES,null=True)

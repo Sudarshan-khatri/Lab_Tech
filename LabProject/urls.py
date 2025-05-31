@@ -45,7 +45,6 @@ router.registry.extend(socialMedia_router.registry)
 router.registry.extend(Booking_router.registry)
 router.registry.extend(Faqs_router.registry)
 router.registry.extend(Account_router.registry)
-# router.registry.extend(logix_router.registry)
 
 
 #swagger documetation:
