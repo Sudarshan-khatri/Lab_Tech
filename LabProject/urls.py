@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-# from . import views
+#from . import views
+from django.views import View
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import routers,permissions
@@ -29,12 +30,12 @@ from booking import urls as booking_urls
 from booking.routers.router import Booking_router
 from FAQS.routers.router import Faqs_router
 from accounts.routers.router import Account_router
-from logix.viewsets.viewset import RegisterView,LoginView
+from logix.viewsets.viewset import RegisterView,LoginView,Reset_password,ResetPasswordConfirmView
 from rest_framework_simplejwt.views import (
     TokenObtainSlidingView,
     TokenRefreshSlidingView,
 )
-from logix.views import Login
+
 
 router=routers.DefaultRouter()
 router.registry.extend(lab_routers.registry)
@@ -66,8 +67,10 @@ schema_view=get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include(router.urls)),
-    path('register',RegisterView.as_view(),name='register'),
-    path('login',LoginView.as_view(),name='login'),
+    path('register/',RegisterView.as_view(),name='register'),
+    path('login/',LoginView.as_view(),name='login'),
+    path('auth/reset-password/', Reset_password.as_view(), name='password-reset'),
+    path('auth/reset-password-confirm/<uidb64>/<token>/', ResetPasswordConfirmView.as_view(), name='password-reset-confirm'),
     path('api/token/', TokenObtainSlidingView.as_view(), name='token_obtain'),
     path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh'),
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),

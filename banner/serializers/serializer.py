@@ -5,7 +5,7 @@ from ..models import Banner
 class ListBannerSerializer(serializers.ModelSerializer):
     class Meta:
         model=Banner
-        fields=['image','image_link','video','video_link']
+        fields='__all__'
 
 class RetrieveBannerSerializer(serializers.ModelSerializer):
     class Meta:

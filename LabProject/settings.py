@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'socialmedia',
     'banner',
     'team',
-    # 'logix',
+    'logix',
     'FAQS',
     'accounts',
     
@@ -76,10 +76,13 @@ ROOT_URLCONF = 'LabProject.urls'
 #Email configurations 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True          
+EMAIL_USE_TLS = False  
 EMAIL_HOST_USER = 'khatrisudarshan360@gmail.com'
-EMAIL_HOST_PASSWORD = 'gmailgmail@123' 
+EMAIL_HOST_PASSWORD = 'yzeq gmsf afxn iktm'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+PASSWORD_RESET_TIMEOUT = 60 * 3
 
 TEMPLATES = [
     {

@@ -1,22 +1,24 @@
 from django.db import models
 import random
 from phonenumber_field.modelfields import PhoneNumberField
+from django.utils.text import slugify
 
 
 # Create your models here.
 class LabModel(models.Model):
     Branch_type_choice=[
         ('Headquarter','Headquarter'),
-        ('Other Branch','other Branch')
+        ('Other Branch','Sub Branch')
     ]
     Branch_name=models.CharField(max_length=100,unique=True,blank=True)
-    Email=models.EmailField(max_length=300,unique=True, null=True, blank=True)
+    Email=models.EmailField(max_length=300,unique=True, null=False, blank=False)
+    slug = models.SlugField(max_length=120, unique=True,null=True,blank=True)
     Phone_number=PhoneNumberField(unique=True,blank=True)
     location=models.CharField(max_length=200,blank=True)
     lab_code=models.CharField(max_length=200,blank=True,editable=False)
     lab_head=models.CharField(max_length=200)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6,default=0.0)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6,default=0.0)
+    latitude=models.DecimalField(max_digits=9, decimal_places=6,default=0.0)
+    longitude=models.DecimalField(max_digits=9, decimal_places=6,default=0.0)
     Branch_type=models.CharField(max_length=200,choices=Branch_type_choice,blank=True)
     capacity=models.IntegerField()
     is_active=models.BooleanField(default=True)
@@ -34,10 +36,11 @@ class LabModel(models.Model):
                 if not LabModel.objects.filter(lab_code=code).exists():
                     self.lab_code=code
                     break
+        if not self.slug:
+            self.slug=slugify(self.Branch_name)
         super().save(*arg,**kwargs)
 
-    def save(self,*args,**kwargs):
-       pass
+    
 
     def __str__(self):
        return  self.Branch_name 

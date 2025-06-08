@@ -8,8 +8,8 @@ from ..form import BookingForm
 class BookingView(viewsets.ModelViewSet):
     queryset=BookingModel.objects.all().order_by('-id')
     serializer_class=ListBookingSerializer
-    renderer_classes=[TemplateHTMLRenderer]
-    template_name=BookingForm
+    # renderer_classes=[TemplateHTMLRenderer]
+    # template_name=BookingForm
 
 
     
