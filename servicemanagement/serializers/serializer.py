@@ -11,7 +11,7 @@ class ListServiceManagementSerializer(serializers.ModelSerializer):
 class RetrieveServiceManagementSerializer(serializers.ModelSerializer):
     class Meta:
         model=ServiceManagement
-        fields=['name','category','Description']
+        fields=['Lab_name','category','Description']
 
 
 class WriteServiceManagementSerializer(serializers.ModelSerializer):
